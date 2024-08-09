@@ -1,7 +1,7 @@
 import flet as ft
 
 
-cor_de_fundo=0xcfe3d4
+cor_de_fundo='#ff0000'
 
 def main(page: ft.Page):
     page.title = "Meu app com flet"
@@ -32,7 +32,8 @@ def main(page: ft.Page):
         label="Digite uma senha",
         password=True,
         can_reveal_password=True,
-        #disabled=True #Para desabilitar
+        bgcolor=ft.colors.YELLOW,
+        #disabled=True, #Para desabilitar
     )
 
     page.add(
