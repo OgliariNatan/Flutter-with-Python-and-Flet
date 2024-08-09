@@ -1,5 +1,8 @@
 import flet as ft
 
+
+cor_de_fundo=0xcfe3d4
+
 def main(page: ft.Page):
     page.title = "Meu app com flet"
     page.vertical_alignment = ft.MainAxisAlignment.CENTER #Alinhamento
@@ -23,6 +26,13 @@ def main(page: ft.Page):
     tb = ft.TextField(
         label="INFORME O SEU NOME",
         on_change=textbox_changed,
+        bgcolor=cor_de_fundo,
+    )
+    senha = ft.TextField(
+        label="Digite uma senha",
+        password=True,
+        can_reveal_password=True,
+        #disabled=True #Para desabilitar
     )
 
     page.add(
@@ -39,9 +49,14 @@ def main(page: ft.Page):
         ft.Row(
             [
                 tb,
-                t,
+                
              ],
              alignment=ft.MainAxisAlignment.CENTER,#Alinhameto da linha
+        ),
+        ft.Row(
+            [
+                senha,
+            ],alignment=ft.MainAxisAlignment.CENTER,#Alinhameto da linha
         )
         
     )
