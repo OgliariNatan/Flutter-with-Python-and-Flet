@@ -14,6 +14,16 @@ def main(page: ft.Page):
         #print(e)
         txt_number.value = str(int(txt_number.value) + 1)
         page.update()#atualiza a tela
+    
+    def textbox_changed(e):
+        t.value = e.control.value
+        page.update()
+    
+    t = ft.Text()
+    tb = ft.TextField(
+        label="INFORME O SEU NOME",
+        on_change=textbox_changed,
+    )
 
     page.add(
         ft.Row(
@@ -22,8 +32,16 @@ def main(page: ft.Page):
                 txt_number,
                 ft.IconButton(ft.icons.ADD, on_click=somar),
                 ft.ElevatedButton("Click me!"),
+                
             ],
             alignment=ft.MainAxisAlignment.CENTER,#Alinhameto da linha
+        ),
+        ft.Row(
+            [
+                tb,
+                t,
+             ],
+             alignment=ft.MainAxisAlignment.CENTER,#Alinhameto da linha
         )
         
     )
