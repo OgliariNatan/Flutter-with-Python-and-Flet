@@ -26,15 +26,24 @@ def main(page: ft.Page):
     tb = ft.TextField(
         label="INFORME O SEU NOME",
         on_change=textbox_changed,
-        bgcolor=cor_de_fundo,
+        bgcolor=ft.colors.GREY,
     )
     senha = ft.TextField(
         label="Digite uma senha",
         password=True,
         can_reveal_password=True,
-        bgcolor=ft.colors.YELLOW,
+        bgcolor=ft.colors.GREY,
         #disabled=True, #Para desabilitar
     )
+
+    page.theme = ft.Theme(
+    color_scheme=ft.ColorScheme(
+        primary=ft.colors.GREEN,
+        primary_container=ft.colors.GREEN_200
+        # ...
+        ),
+    )
+
 
     page.add(
         ft.Row(
