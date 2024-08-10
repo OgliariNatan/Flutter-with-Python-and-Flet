@@ -7,6 +7,15 @@ def main(page: ft.Page):
     page.title = "Meu app com flet"
     page.vertical_alignment = ft.MainAxisAlignment.CENTER #Alinhamento
 
+    conteiner = ft.Container(
+        width=150,
+        height=150,
+        border=ft.border.all(0.5, ft.colors.GREY_200),
+        content=ft.FilledButton("Primeira cor"),
+        theme=ft.Theme(color_scheme=ft.ColorScheme(primary=ft.colors.GREEN_300))
+    )
+    page.add(conteiner)
+
     txt_number = ft.TextField(value="0", text_align=ft.TextAlign.CENTER, width=50)
 
     def diminuir(e):
@@ -38,11 +47,15 @@ def main(page: ft.Page):
 
     page.theme = ft.Theme(
     color_scheme=ft.ColorScheme(
-        primary=ft.colors.GREEN,
-        primary_container=ft.colors.GREEN_200
+        primary=ft.colors.BLUE,
+        primary_container=ft.colors.BLUE_300,
+        secondary=ft.colors.GREEN,
+        secondary_container=ft.colors.GREEN_300,
+
         # ...
         ),
     )
+    #page.update()
 
 
     page.add(
@@ -51,7 +64,7 @@ def main(page: ft.Page):
                 ft.IconButton(ft.icons.REMOVE, on_click=diminuir),
                 txt_number,
                 ft.IconButton(ft.icons.ADD, on_click=somar),
-                ft.ElevatedButton("Click me!"),
+                ft.ElevatedButton("Clique Aqui!"),
                 
             ],
             alignment=ft.MainAxisAlignment.CENTER,#Alinhameto da linha
