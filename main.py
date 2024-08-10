@@ -1,7 +1,8 @@
+# -*- coding: utf-8 -*-
+
 import flet as ft
 
 
-cor_de_fundo='#ff0000'
 
 def main(page: ft.Page):
     page.title = "Meu app com flet"
@@ -14,7 +15,7 @@ def main(page: ft.Page):
         content=ft.FilledButton("Primeira cor"),
         theme=ft.Theme(color_scheme=ft.ColorScheme(primary=ft.colors.GREEN_300))
     )
-    page.add(conteiner)
+    
 
     txt_number = ft.TextField(value="0", text_align=ft.TextAlign.CENTER, width=50)
 
@@ -65,6 +66,7 @@ def main(page: ft.Page):
                 txt_number,
                 ft.IconButton(ft.icons.ADD, on_click=somar),
                 ft.ElevatedButton("Clique Aqui!"),
+                conteiner,
                 
             ],
             alignment=ft.MainAxisAlignment.CENTER,#Alinhameto da linha
@@ -83,5 +85,5 @@ def main(page: ft.Page):
         )
         
     )
-#ft.app(target=main, view=ft.WEB_BROWSER)
-ft.app(target=main)
+ft.app(target=main, view=ft.WEB_BROWSER)
+# ft.app(target=main)
