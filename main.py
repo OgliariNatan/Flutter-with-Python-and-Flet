@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import flet as ft
-
-
+import pyrebase
 
 def main(page: ft.Page):
     page.title = "Meu app com flet"
