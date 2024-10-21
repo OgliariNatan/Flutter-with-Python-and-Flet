@@ -3,15 +3,42 @@
 import flet as ft
 import pyrebase
 
+
+
+
+firebaseConfig = {
+  "apiKey": "AIzaSyAn3SvYnMIWxmu4Vt1XorsEUR_E4wqgy80",
+  "authDomain": "exemplo-teste-b9336.firebaseapp.com",
+  "projectId": "exemplo-teste-b9336",
+  "databaseURL": "https:exemplo-teste.firebaseio.com",
+  "storageBucket": "exemplo-teste-b9336.appspot.com",
+  "messagingSenderId": "1017608586195",
+  "appId": "1:1017608586195:web:a10bf65ba85dc32190a526",
+  "measurementId": "G-LE71SEWKHS"
+}
+
+firebase = pyrebase.initialize_app(firebaseConfig)
+auth = firebase.auth()
+
+
+
+
+
 def main(page: ft.Page):
     page.title = "Meu app com flet"
     page.vertical_alignment = ft.MainAxisAlignment.CENTER #Alinhamento
+    page.vertical_alignment = 'center'
+    page.horizontal_alignment = 'center'
+    page.window_resizable = True
+    page.window_width = 650
+    page.window_height = 550
+    page.padding = 20
 
     conteiner = ft.Container(
         width=150,
-        height=150,
+        height=100,
         border=ft.border.all(0.5, ft.colors.GREY_200),
-        content=ft.FilledButton("Primeira cor"),
+        #content=ft.FilledButton("Primeira cor"),
         theme=ft.Theme(color_scheme=ft.ColorScheme(primary=ft.colors.GREEN_300))
     )
     
@@ -31,18 +58,67 @@ def main(page: ft.Page):
         t.value = e.control.value
         page.update()
     
-    t = ft.Text()
-    tb = ft.TextField(
-        label="INFORME O SEU NOME",
+    def entrar_click(e):
+        try:
+            auth.sign_in_with_email_and_password(usuario.value, senha.value)
+            page.snack_bar = ft.SnackBar(
+                content= ft.Text(
+                    value= "logado com sucesso",
+                ),
+                bgcolor=ft.colors.GREEN_400,
+                action= "ok",
+                duration=3000,
+            )
+            page.snack_bar.open = True,
+            usuario.value = None,
+            senha.value = None,
+            page.update()
+        except:
+            page.snack_bar = ft.SnackBar(
+                content= ft.Text(
+                    value= "Login invalido",
+                ),
+                bgcolor=ft.colors.RED_400,
+                action= "ok",
+                duration=3000,
+            )
+            page.snack_bar.open = True,
+            page.update()
+
+
+    usuario = ft.TextField(
+        hint_text= "Email",
+        label="Email",
         on_change=textbox_changed,
-        bgcolor=ft.colors.GREY,
+        bgcolor=ft.colors.GREY_300,
+        label_style= ft.TextStyle(
+            color= ft.colors.GREY,
+        ),
     )
+   
     senha = ft.TextField(
-        label="Digite uma senha",
+        hint_text= "Senha",
+        label="Senha",
         password=True,
         can_reveal_password=True,
-        bgcolor=ft.colors.GREY,
+        bgcolor=ft.colors.GREY_300,
+        label_style= ft.TextStyle(
+            color= ft.colors.GREY,
+        ),
         #disabled=True, #Para desabilitar
+    )
+    
+    entrar = ft.ElevatedButton(
+        text='Entrar',
+        on_click=entrar_click,
+                
+    )
+
+    texto_login = ft.Text(
+        value="Login",
+        size=32,
+        weight='bold',
+        color=ft.colors.BLUE,
     )
 
     page.theme = ft.Theme(
@@ -72,7 +148,12 @@ def main(page: ft.Page):
         ),
         ft.Row(
             [
-                tb,
+                texto_login,
+            ],alignment=ft.MainAxisAlignment.CENTER,#Alinhameto da linha
+        ),
+        ft.Row(
+            [
+                usuario,#login
                 
              ],
              alignment=ft.MainAxisAlignment.CENTER,#Alinhameto da linha
@@ -81,8 +162,17 @@ def main(page: ft.Page):
             [
                 senha,
             ],alignment=ft.MainAxisAlignment.CENTER,#Alinhameto da linha
+        ),
+        ft.Row(
+            [
+                entrar,
+            ],alignment=ft.MainAxisAlignment.CENTER,
         )
         
     )
 # ft.app(target=main, view=ft.WEB_BROWSER)
 ft.app(target=main)
+
+
+
+#
