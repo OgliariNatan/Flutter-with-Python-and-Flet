@@ -56,12 +56,15 @@ def main(page: ft.Page):
     
     def textbox_changed(e):
         t.value = e.control.value
+        t.value = None
+        print("Entrou func. texbox_changed")
         page.update()
+    t = ft.Text()
     
     def entrar_click(e):
         try:
-            auth.sign_in_with_email_and_password(usuario.value, senha.value)
-            page.snack_bar = ft.SnackBar(
+            auth.sign_in_with_email_and_password(t.value, senha.value)
+            page.snack_bar = ft.SnackBar( #popup
                 content= ft.Text(
                     value= "logado com sucesso",
                 ),
@@ -175,4 +178,5 @@ ft.app(target=main)
 
 
 
-#
+#https://www.youtube.com/watch?v=pRZg8brOgX8
+#https://blog.marcusoliveiradev.com.br/como-fazer-card-com-html-e-css-responsivo/
